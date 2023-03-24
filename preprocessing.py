@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jul  9 14:48:37 2021
-
-@author: OpenClassrooms
-"""
 
 # Import Python libraries
 import numpy as np
