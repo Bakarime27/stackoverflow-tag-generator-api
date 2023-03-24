@@ -12,7 +12,7 @@ This API entry point extends the Tag generator project for Stackoverflow questio
 Project is created with:
 * Flask and Flask_RestFul
 * Swagger
-* Python 3.7 *(Numpy, Pandas, Sklearn, NLTK, Spacy ...)*
+* Python 3.9 *(Numpy, Pandas, Sklearn, NLTK, Spacy ...)*
 
 	
 ## <span id="setup">Setup</span>
