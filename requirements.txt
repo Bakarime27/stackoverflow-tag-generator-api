@@ -1,6 +1,6 @@
 bs4
 deep-translator
-flasgger
+flask-restful-swagger
 joblib
 langdetect
 nltk
