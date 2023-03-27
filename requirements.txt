@@ -1,19 +1,8 @@
-
-beautifulsoup4
 bs4
 deep-translator
-fastapi
 flasgger
-Flask
-flask-apispec
-Flask-RESTful
-flask-restplus
-gensim
-gunicorn
 joblib
-jsonschema
 langdetect
-lxml
 nltk
 spacy
 en_core_web_lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.3.0/en_core_web_lg-3.3.0-py3-none-any.whl
