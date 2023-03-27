@@ -10,7 +10,7 @@ This API entry point extends the Tag generator project for Stackoverflow questio
 	
 ## <span id="technologies">Technologies</span>
 Project is created with:
-* Flask and Flask_RestFul
+* Flask
 * Swagger
 * Python 3.9 *(Numpy, Pandas, Sklearn, NLTK, Spacy ...)*
 
