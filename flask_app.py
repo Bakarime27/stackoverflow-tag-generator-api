@@ -57,7 +57,8 @@ class Autotag(Resource):
                                description: List of tags with over 30% of probabilities
         """
         # Clean the question sent
-        nlp = en_core_web_sm.load(exclude=['tok2vec', 'ner', 'parser', 'attribute_ruler', 'lemmatizer'])
+        nlp = spacy.load('en_core_web_sm')
+        #nlp = en_core_web_sm.load(exclude=['tok2vec', 'ner', 'parser', 'attribute_ruler', 'lemmatizer'])
         #nlp = spacy.load('en_core_web_md', exclude=['tok2vec', 'ner', 'parser', 'attribute_ruler', 'lemmatizer'])
         #nlp = spacy.load('en_core_web_lg') 
         pos_list = ["NOUN","PROPN"]
