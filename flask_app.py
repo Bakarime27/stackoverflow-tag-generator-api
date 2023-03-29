@@ -102,11 +102,12 @@ def serve(path):
 
 @app.route('/api/getRecommendedTags', methods=['POST'])
 def api_all():
-	question = []
-	question.append(request.json['question'])
-	print(question)
-	tags = getTags(question)[0]
-	return jsonify(tags)
+    #question = []
+    #question.append(request.json['question'])
+    question = request.json['question']
+    print(question)
+    tags = getTags(question)[0]
+    return jsonify(tags)
 
 #api.add_resource(Autotag, '/autotag/<question>')
 
