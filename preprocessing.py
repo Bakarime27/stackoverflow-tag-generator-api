@@ -10,9 +10,12 @@ from deep_translator import GoogleTranslator
 import nltk
 from nltk.corpus import stopwords
 import spacy
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 # Initialize NLP parameters
-#nltk.download('popular')
+nltk.download('popular')
 
 # Cleaning function for new question
 def remove_pos(nlp, x, pos_list):
