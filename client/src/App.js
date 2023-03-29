@@ -8,7 +8,7 @@ export default function App() {
 
 	const fetchTags = async() => {
 		console.log(question)
-		let response = await fetch('/autotag', {
+		let response = await fetch('/api/getRecommendedTags', {
 			headers:{
 				'content-type': 'application/json'
 			},
