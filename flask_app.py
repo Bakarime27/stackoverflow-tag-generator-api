@@ -10,7 +10,7 @@ import en_core_web_sm
 import preprocessing as ppc
 
 
-app = Flask(__name__, static_url_path='/', static_folder='./client/build')
+app = Flask(__name__, static_url_path='/', static_folder='./build')
 #api = Api(app)
 
 template = {
