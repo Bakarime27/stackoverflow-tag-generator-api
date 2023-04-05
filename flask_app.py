@@ -32,7 +32,7 @@ model = joblib.load(model_path + "logit_nlp_model.pkl", 'r')
 
 class Autotag(Resource):
     def get(self, question):
-        """
+       """
        This examples uses FlaskRESTful Resource for Stackoverflow auto-tagging questions
        To test, copy and paste a non-cleaned question (even with HTML tags or code) and execute the model.
        ---
