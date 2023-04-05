@@ -88,8 +88,8 @@ class Autotag(Resource):
         results['Predicted_Tags_Probabilities'] = df_predict_probas\
             .set_index('Tags')['Probas'].to_dict()
         
-        #return results, 200
-	      return tags_predict
+        return results, 200
+	#return tags_predict
 
 
 api.add_resource(Autotag, '/autotag/<question>')
