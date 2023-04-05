@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flasgger import Swagger
 from flask_restful import Api, Resource
 import pandas as pd
@@ -8,7 +8,7 @@ import en_core_web_sm
 import preprocessing as ppc
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 api = Api(app)
 
 template = {
@@ -90,6 +90,10 @@ class Autotag(Resource):
         
         return results, 200
 	#return tags_predict
+	
+@app.route("/", defaults={'path':''})
+def serve(path):
+    return send_from_directory(app.static_folder,'index.html')
 
 
 api.add_resource(Autotag, '/autotag/<question>')
