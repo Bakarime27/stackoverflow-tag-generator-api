@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flasgger import Swagger
 from flask_restful import Api, Resource
 import pandas as pd
@@ -8,7 +8,7 @@ import en_core_web_sm
 import preprocessing as ppc
 
 
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='', static_folder='client/public')
 api = Api(app)
 
 template = {
@@ -32,7 +32,7 @@ model = joblib.load(model_path + "logit_nlp_model.pkl", 'r')
 
 class Autotag(Resource):
     def get(self, question):
-        """
+       """
        This examples uses FlaskRESTful Resource for Stackoverflow auto-tagging questions
        To test, copy and paste a non-cleaned question (even with HTML tags or code) and execute the model.
        ---
@@ -55,42 +55,45 @@ class Autotag(Resource):
                            Predicted_Tags_Probabilities:
                                type: string
                                description: List of tags with over 30% of probabilities
-        """
-        # Clean the question sent
-        nlp = spacy.load('en_core_web_sm')
-        #nlp = en_core_web_sm.load(exclude=['tok2vec', 'ner', 'parser', 'attribute_ruler', 'lemmatizer'])
-        #nlp = spacy.load('en_core_web_md', exclude=['tok2vec', 'ner', 'parser', 'attribute_ruler', 'lemmatizer'])
-        #nlp = spacy.load('en_core_web_lg') 
-        pos_list = ["NOUN","PROPN"]
-        rawtext = question
-        cleaned_question = ppc.text_cleaner(rawtext, nlp, pos_list, "english")
-        
-        # Apply saved trained TfidfVectorizer
-        X_tfidf = vectorizer.transform([cleaned_question])
-        
-        # Perform prediction
-        predict = model.predict(X_tfidf)
-        predict_probas = model.predict_proba(X_tfidf)
-        # Inverse multilabel binarizer
-        tags_predict = multilabel_binarizer.inverse_transform(predict)
-        
-        # DataFrame of probas
-        df_predict_probas = pd.DataFrame(columns=['Tags', 'Probas'])
-        df_predict_probas['Tags'] = multilabel_binarizer.classes_
-        df_predict_probas['Probas'] = predict_probas.reshape(-1)
-        # Select probas > 33%
-        df_predict_probas = df_predict_probas[df_predict_probas['Probas']>=0.33]\
-            .sort_values('Probas', ascending=False)
-            
-        # Results
-        results = {}
-        results['Predicted_Tags'] = tags_predict
-        results['Predicted_Tags_Probabilities'] = df_predict_probas\
-            .set_index('Tags')['Probas'].to_dict()
-        
-        #return results, 200
-	      return tags_predict
+       """
+       # Clean the question sent
+       nlp = spacy.load('en_core_web_sm')
+      #nlp = en_core_web_sm.load(exclude=['tok2vec', 'ner', 'parser', 'attribute_ruler', 'lemmatizer'])
+      #nlp = spacy.load('en_core_web_md', exclude=['tok2vec', 'ner', 'parser', 'attribute_ruler', 'lemmatizer'])
+      #nlp = spacy.load('en_core_web_lg') 
+       pos_list = ["NOUN","PROPN"]
+       rawtext = question
+       cleaned_question = ppc.text_cleaner(rawtext, nlp, pos_list, "english")
+      
+      # Apply saved trained TfidfVectorizer
+       X_tfidf = vectorizer.transform([cleaned_question])
+      
+      # Perform prediction
+       predict = model.predict(X_tfidf)
+       predict_probas = model.predict_proba(X_tfidf)
+      # Inverse multilabel binarizer
+       tags_predict = multilabel_binarizer.inverse_transform(predict)
+      
+      # DataFrame of probas
+       df_predict_probas = pd.DataFrame(columns=['Tags', 'Probas'])
+       df_predict_probas['Tags'] = multilabel_binarizer.classes_
+       df_predict_probas['Probas'] = predict_probas.reshape(-1)
+      # Select probas > 33%
+       df_predict_probas = df_predict_probas[df_predict_probas['Probas']>=0.33]\
+          .sort_values('Probas', ascending=False)
+          
+      # Results
+       results = {}
+       results['Predicted_Tags'] = tags_predict
+       results['Predicted_Tags_Probabilities'] = df_predict_probas\
+          .set_index('Tags')['Probas'].to_dict()
+      
+      #return results, 200
+       return tags_predict
 
+@app.route("/", defaults={'path':''})
+def serve(path):
+    return send_from_directory(app.static_folder,'index.html')
 
 api.add_resource(Autotag, '/autotag/<question>')
 

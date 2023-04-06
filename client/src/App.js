@@ -8,7 +8,7 @@ export default function App() {
 
 	const fetchTags = async() => {
 		console.log(question)
-		let response = await fetch('/api/getRecommendedTags', {
+		let response = await fetch('/autotag', {
 			headers:{
 				'content-type': 'application/json'
 			},
@@ -32,7 +32,7 @@ export default function App() {
 				<img src="https://cdn.sstatic.net/Sites/stackoverflow/company/Img/logos/so/so-logo.svg?v=a010291124bf" className="stackoverflow_logo" alt="logo"/>
 			</header>
 
-			<p id="header__text">Enter the question you intend to post to Stackoverflow to <span>generate a list of apt tags for the question!</span></p>
+			<p id="header__text">Enter the question you intend to post to Stackoverflow to <span>generate a list of tags for the question!</span></p>
 
 			<textarea 
 				placeholder="Enter question here..."
