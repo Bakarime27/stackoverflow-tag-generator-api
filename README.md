@@ -1,6 +1,7 @@
-# Machine Learning - Stackoverflow tags generator API
+# Machine Learning - Stackoverflow tags generator
+This repository contains 2 **jupiter notebooks** for exploring and modeling stackoverflow data, **python code** for the api predicting tags for questions and **nodejs and react** code for the frontend of the api 
 
-## Table of contents
+## Table of contents of the api
 * [General information](#general-info)
 * [Technologies](#technologies)
 * [Setup](#setup)
@@ -13,10 +14,11 @@ Project is created with:
 * Flask
 * Swagger
 * Python 3.9 *(Numpy, Pandas, Sklearn, NLTK, Spacy ...)*
+* nodejs
+* react
 
 	
 ## <span id="setup">Setup</span>
-To query the API via Curl, send the question to tag as 
-```text
-curl -X GET "https://stackoverflow-tag-api.herokuapp.com/autotag/Test%20with%20Python%20question%20or%20Javascript%20with % 20pipeline "-H" accept: application / json "
-```
+Link to query the API : 
+https://stackoverflow-tag-api.herokuapp.com/
+
